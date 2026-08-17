@@ -371,7 +371,8 @@ const specs: ShipmentSpec[] = [
     service: "freight",
     package: { kind: "pallet", pieces: 2, weightKg: 412.0, dimensions: "120 × 100 × 150 cm" },
     createdAt: "2026-08-11T06:00:00.000Z",
-    eta: "2026-08-15T17:00:00.000Z",
+    // Missed its window — the on-time metric would otherwise read a flat 100%.
+    eta: "2026-08-13T17:00:00.000Z",
     reached: "delivered",
     proofOfDelivery: {
       deliveredAt: "2026-08-14T00:00:00.000Z",

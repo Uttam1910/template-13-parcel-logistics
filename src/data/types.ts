@@ -38,11 +38,7 @@ export type LifecycleStage = (typeof LIFECYCLE_STAGES)[number];
  * `delayed` and `exception` are overlay states that can occur at any stage
  * without moving the shipment backwards.
  */
-export const SHIPMENT_STATUSES = [
-  ...LIFECYCLE_STAGES,
-  "delayed",
-  "exception",
-] as const;
+export const SHIPMENT_STATUSES = [...LIFECYCLE_STAGES, "delayed", "exception"] as const;
 
 export type ShipmentStatus = (typeof SHIPMENT_STATUSES)[number];
 
@@ -87,7 +83,13 @@ export type Facility = {
  * Shipments
  * ------------------------------------------------------------------ */
 
-export const SERVICE_LEVELS = ["express", "standard", "same_day", "freight", "returns"] as const;
+export const SERVICE_LEVELS = [
+  "express",
+  "standard",
+  "same_day",
+  "freight",
+  "returns",
+] as const;
 export type ServiceLevel = (typeof SERVICE_LEVELS)[number];
 
 export type PackageKind = "envelope" | "parcel" | "box" | "pallet" | "crate";

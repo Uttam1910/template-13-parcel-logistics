@@ -1,6 +1,5 @@
 import {
   AlertTriangle,
-  CheckCircle2,
   ClipboardList,
   Clock,
   PackageCheck,
@@ -26,8 +25,10 @@ import {
  */
 
 export type StatusMeta = {
-  /** Sentence-case label used in tables, badges and timelines. */
+  /** Sentence-case label used in timelines and full-size badges. */
   label: string;
+  /** Trimmed label for dense contexts — table badges on narrow viewports. */
+  short: string;
   /** Upper-case form for the headline treatment on tracking pages. */
   headline: string;
   /** One line explaining what the status means to a recipient. */
@@ -39,6 +40,7 @@ export type StatusMeta = {
 export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   created: {
     label: "Order created",
+    short: "Created",
     headline: "ORDER CREATED",
     description: "We have the shipment details. The parcel has not been collected yet.",
     tone: "neutral",
@@ -46,6 +48,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   picked_up: {
     label: "Picked up",
+    short: "Picked up",
     headline: "PICKED UP",
     description: "The parcel has been collected from the shipper and is entering the network.",
     tone: "progress",
@@ -53,6 +56,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   origin_facility: {
     label: "At origin facility",
+    short: "At origin",
     headline: "AT ORIGIN FACILITY",
     description: "The parcel has been scanned at the first facility on its route.",
     tone: "progress",
@@ -60,6 +64,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   in_transit: {
     label: "In transit",
+    short: "In transit",
     headline: "IN TRANSIT",
     description: "The parcel is moving between facilities on its way to the destination.",
     tone: "active",
@@ -67,6 +72,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   destination_facility: {
     label: "At destination facility",
+    short: "At destination",
     headline: "AT DESTINATION FACILITY",
     description: "The parcel has reached the final facility and is being sorted for delivery.",
     tone: "progress",
@@ -74,6 +80,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   out_for_delivery: {
     label: "Out for delivery",
+    short: "Out for delivery",
     headline: "OUT FOR DELIVERY",
     description: "The parcel is loaded on a delivery round and is due today.",
     tone: "active",
@@ -81,6 +88,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   delivered: {
     label: "Delivered",
+    short: "Delivered",
     headline: "DELIVERED",
     description: "The parcel has been delivered and proof of delivery is available.",
     tone: "success",
@@ -88,6 +96,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   delayed: {
     label: "Delayed",
+    short: "Delayed",
     headline: "DELAYED",
     description: "The parcel is still moving but is running behind its estimated delivery.",
     tone: "warning",
@@ -95,6 +104,7 @@ export const statusMeta: Record<ShipmentStatus, StatusMeta> = {
   },
   exception: {
     label: "Exception",
+    short: "Exception",
     headline: "EXCEPTION",
     description: "Something needs attention before the parcel can continue to the recipient.",
     tone: "danger",
@@ -179,13 +189,7 @@ export type StatusFilter = (typeof STATUS_FILTERS)[number];
  */
 export const statusFilterGroups: Record<StatusFilter, ShipmentStatus[]> = {
   all: [],
-  in_transit: [
-    "created",
-    "picked_up",
-    "origin_facility",
-    "in_transit",
-    "destination_facility",
-  ],
+  in_transit: ["created", "picked_up", "origin_facility", "in_transit", "destination_facility"],
   out_for_delivery: ["out_for_delivery"],
   delivered: ["delivered"],
   delayed: ["delayed"],

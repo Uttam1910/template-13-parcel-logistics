@@ -1,0 +1,391 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Parcel — design tokens
+ *
+ * Precision, movement, infrastructure. Cool paper and graphite in light,
+ * deep ink-navy in dark, with a single restrained signal orange reserved
+ * for things that are actually moving or actually need attention.
+ *
+ * The two themes are authored independently — dark is not an inversion.
+ * ------------------------------------------------------------------ */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  color-scheme: light;
+
+  /* Ground & surfaces — cool paper */
+  --parcel-bg: #f1f3f6;
+  --parcel-bg-subtle: #e9edf1;
+  --parcel-surface: #ffffff;
+  --parcel-surface-2: #f7f9fb;
+  --parcel-surface-3: #eef1f5;
+  --parcel-overlay: rgb(12 20 28 / 0.48);
+
+  /* Rules — thin and technical */
+  --parcel-line: #dce2e9;
+  --parcel-line-strong: #bcc7d2;
+
+  /* Ink — graphite on paper */
+  --parcel-ink: #0f1720;
+  --parcel-ink-muted: #4c5a68;
+  /* Holds 4.5:1 on paper, white and the tinted surface alike. */
+  --parcel-ink-faint: #64717e;
+
+  /* Deep navy — hero ground and heavy headers */
+  --parcel-navy: #101f31;
+  --parcel-navy-ink: #dbe5ef;
+
+  /* Signal — restrained amber/orange, used sparingly */
+  --parcel-accent: #ad4f0d;
+  --parcel-accent-hover: #8d3f09;
+  --parcel-accent-fg: #fffaf5;
+  --parcel-accent-soft: #fcedde;
+  --parcel-accent-soft-ink: #834009;
+  --parcel-accent-line: #eecdaa;
+
+  /* Status */
+  --parcel-success: #146b45;
+  --parcel-success-soft: #dff0e8;
+  --parcel-warning: #855405;
+  --parcel-warning-soft: #faecd0;
+  --parcel-danger: #a02a25;
+  --parcel-danger-soft: #fbe3e0;
+  --parcel-info: #1c5776;
+  --parcel-info-soft: #e0edf4;
+
+  /* Effects */
+  --parcel-ring: #ad4f0d;
+  --parcel-shadow-sm: 0 1px 1px rgb(15 23 32 / 0.05);
+  --parcel-shadow: 0 1px 2px rgb(15 23 32 / 0.05), 0 6px 20px -12px rgb(15 23 32 / 0.22);
+  --parcel-shadow-lg: 0 2px 4px rgb(15 23 32 / 0.05), 0 24px 48px -24px rgb(15 23 32 / 0.32);
+
+  /* Artwork tones — route, coverage and package SVG systems */
+  --art-field: #e6ebf1;
+  --art-grid: #d5dde6;
+  --art-land: #dfe6ed;
+  --art-land-2: #d3dce5;
+  --art-edge: #b7c3cf;
+  --art-node: #7c8b99;
+  --art-kraft: #d8c3a1;
+  --art-kraft-2: #c2a880;
+  --art-tape: #e8dcc4;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --parcel-bg: #080d13;
+  --parcel-bg-subtle: #0b121a;
+  --parcel-surface: #101a24;
+  --parcel-surface-2: #15212d;
+  --parcel-surface-3: #1b2936;
+  --parcel-overlay: rgb(2 6 10 / 0.7);
+
+  --parcel-line: #223140;
+  --parcel-line-strong: #35485c;
+
+  --parcel-ink: #e8eef5;
+  --parcel-ink-muted: #9aabbb;
+  /* Holds 4.5:1 against every dark surface in the ladder. */
+  --parcel-ink-faint: #8598a9;
+
+  --parcel-navy: #0b1520;
+  --parcel-navy-ink: #cfdcea;
+
+  --parcel-accent: #f0a552;
+  --parcel-accent-hover: #f7bb77;
+  --parcel-accent-fg: #1a1006;
+  --parcel-accent-soft: #2c2013;
+  --parcel-accent-soft-ink: #f3bd83;
+  --parcel-accent-line: #4d3920;
+
+  --parcel-success: #5fc394;
+  --parcel-success-soft: #0f2620;
+  --parcel-warning: #e0ab52;
+  --parcel-warning-soft: #2a2110;
+  --parcel-danger: #ee8d84;
+  --parcel-danger-soft: #2d1918;
+  --parcel-info: #77b6da;
+  --parcel-info-soft: #10242f;
+
+  --parcel-ring: #f0a552;
+  --parcel-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5);
+  --parcel-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -14px rgb(0 0 0 / 0.8);
+  --parcel-shadow-lg: 0 2px 4px rgb(0 0 0 / 0.45), 0 28px 56px -28px rgb(0 0 0 / 0.9);
+
+  --art-field: #0e1822;
+  --art-grid: #1a2836;
+  --art-land: #16232f;
+  --art-land-2: #1c2c3a;
+  --art-edge: #2b3e50;
+  --art-node: #6b8194;
+  --art-kraft: #6a5943;
+  --art-kraft-2: #55462f;
+  --art-tape: #3a3222;
+}
+
+@theme inline {
+  --color-bg: var(--parcel-bg);
+  --color-bg-subtle: var(--parcel-bg-subtle);
+  --color-surface: var(--parcel-surface);
+  --color-surface-2: var(--parcel-surface-2);
+  --color-surface-3: var(--parcel-surface-3);
+  --color-overlay: var(--parcel-overlay);
+
+  --color-line: var(--parcel-line);
+  --color-line-strong: var(--parcel-line-strong);
+
+  --color-ink: var(--parcel-ink);
+  --color-ink-muted: var(--parcel-ink-muted);
+  --color-ink-faint: var(--parcel-ink-faint);
+
+  --color-navy: var(--parcel-navy);
+  --color-navy-ink: var(--parcel-navy-ink);
+
+  --color-accent: var(--parcel-accent);
+  --color-accent-hover: var(--parcel-accent-hover);
+  --color-accent-fg: var(--parcel-accent-fg);
+  --color-accent-soft: var(--parcel-accent-soft);
+  --color-accent-soft-ink: var(--parcel-accent-soft-ink);
+  --color-accent-line: var(--parcel-accent-line);
+
+  --color-success: var(--parcel-success);
+  --color-success-soft: var(--parcel-success-soft);
+  --color-warning: var(--parcel-warning);
+  --color-warning-soft: var(--parcel-warning-soft);
+  --color-danger: var(--parcel-danger);
+  --color-danger-soft: var(--parcel-danger-soft);
+  --color-info: var(--parcel-info);
+  --color-info-soft: var(--parcel-info-soft);
+
+  --font-sans: var(--font-parcel-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-parcel-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Sharp by design — this is infrastructure software, not a marketing card. */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+
+  --shadow-parcel-sm: var(--parcel-shadow-sm);
+  --shadow-parcel: var(--parcel-shadow);
+  --shadow-parcel-lg: var(--parcel-shadow-lg);
+}
+
+@layer base {
+  * {
+    border-color: var(--parcel-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--parcel-bg);
+    color: var(--parcel-ink);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    color: var(--parcel-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--parcel-ring);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+
+  ::selection {
+    background: var(--parcel-accent-soft);
+    color: var(--parcel-accent-soft-ink);
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  /*
+   * Grid items default to `min-width: auto`, which lets a wide table stretch
+   * its container instead of scrolling inside it. Zero specificity via
+   * :where() so an explicit min-w-* utility still wins.
+   */
+  :where(.grid) > * {
+    min-width: 0;
+  }
+}
+
+@layer components {
+  /* Small caps-style technical label. Mono, because this is operational data. */
+  .parcel-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--parcel-ink-faint);
+  }
+
+  /* Tracking numbers, timestamps, weights — anything that should align. */
+  .parcel-numeral {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Surveyor's graticule behind hero and route sections. */
+  .parcel-graticule {
+    background-image:
+      linear-gradient(to right, var(--art-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--art-grid) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 70%);
+  }
+
+  /* Fine horizontal rule pattern used to weight section headers. */
+  .parcel-hatch {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--parcel-line-strong) 0 1px,
+      transparent 1px 6px
+    );
+  }
+
+  .parcel-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--parcel-line-strong) transparent;
+  }
+  .parcel-scroll::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  .parcel-scroll::-webkit-scrollbar-thumb {
+    background: var(--parcel-line-strong);
+    border-radius: 8px;
+  }
+  .parcel-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  .animate-parcel-in {
+    animation: parcel-in 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-parcel-scale-in {
+    animation: parcel-scale-in 150ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-parcel-slide-left {
+    animation: parcel-slide-left 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* The active leg of a route. One short dash cycle, paused for reduced motion. */
+  .animate-parcel-dash {
+    stroke-dasharray: 3 3;
+    animation: parcel-dash 1.6s linear infinite;
+  }
+
+  /* Current-location marker halo. */
+  .animate-parcel-ping {
+    animation: parcel-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+    transform-origin: center;
+  }
+}
+
+@keyframes parcel-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes parcel-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes parcel-slide-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes parcel-dash {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+@keyframes parcel-ping {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Keep the dash pattern, drop the movement. */
+  .animate-parcel-dash {
+    animation: none !important;
+  }
+  .animate-parcel-ping {
+    animation: none !important;
+    opacity: 0.28 !important;
+  }
+}
+
+@media print {
+  .parcel-no-print {
+    display: none !important;
+  }
+}
